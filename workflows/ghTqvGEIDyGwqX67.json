@@ -1,0 +1,288 @@
+{
+  "active": false,
+  "connections": {
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "NOAA Coordinator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NOAA Coordinator Agent": {
+      "main": [
+        []
+      ]
+    },
+    "AvailableTools": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Coordinator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "NOAA Coordinator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "NOAA Coordinator Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "NOAA Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Coordinator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TidesAndCurrents Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Coordinator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-17T22:25:14.925Z",
+  "id": "ghTqvGEIDyGwqX67",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "NOAA Coordinator Agent",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a7e8754d-a111-479a-be14-485523f6fad7",
+      "name": "Chat Trigger",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        0
+      ],
+      "webhookId": "9910c327-110c-4ead-aa4d-b27a5c988475"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Chat Trigger').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "You are a specialized NOAA data coordinator agent. Your role is to:\n\n1. Understand user requests for NOAA data\n2. Determine whether the request is best handled by:\n   - The NOAA Agent (for general NOAA data)\n   - The TidesAndCurrents Agent (for tides and water level data)\n3. Delegate requests to the appropriate sub-agent\n4. Format and return responses consistently\n\nFollow these guidelines:\n1. Query Available Tools node for capabilities\n2. Validate parameters before use\n3. Handle errors gracefully\n4. Follow rate limits\n5. Process and format responses consistently\n\nIf you are asked about selecting nearby locations or similar data, make the choice based on your best judgement and retrieve that data"
+        }
+      },
+      "id": "5ebfedb2-e4d4-46c9-a0cc-e212b33297ae",
+      "name": "NOAA Coordinator Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -340,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM \"AvailableTools\" WHERE workflow_name IN ('NOAA_Main_Agent', 'all') ORDER BY tool_name;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.5,
+      "position": [
+        460,
+        220
+      ],
+      "id": "6397b0aa-5abf-4fe9-bad8-3891617e5714",
+      "name": "AvailableTools",
+      "credentials": {
+        "postgres": {
+          "id": "cXUsJeNKhv5471XR",
+          "name": "CardinLocal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -440,
+        260
+      ],
+      "id": "fe3e9ec7-e909-4a14-ae88-23d4e1637fc3",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "jiaWKIPd7Ax7W6gQ",
+          "name": "OpenAi"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -280,
+        260
+      ],
+      "id": "95e4d74e-2520-4a72-b87f-3d0cd4f7f87d",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "cXUsJeNKhv5471XR",
+          "name": "CardinLocal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "NOAA_Agent",
+        "description": "This workflow provides a comprehensive interface to the NOAA Climate Data Online (CDO) API, allowing users to retrieve various climate and weather data products through natural language queries.\n",
+        "workflowId": {
+          "__rl": true,
+          "value": "Ex9nZnbynflDwWht",
+          "mode": "list",
+          "cachedResultName": "NOAA Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "sessionId": "={{ $json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        300
+      ],
+      "id": "6360e8c5-d830-4fbd-8c9b-e35e866b5fc0",
+      "name": "NOAA Agent"
+    },
+    {
+      "parameters": {
+        "name": "TidesAndCurrents_Agent",
+        "description": "This workflow provides a comprehensive interface to the NOAA Tides and Currents API, allowing users to retrieve various oceanographic and meteorological data products through natural language queries.",
+        "workflowId": {
+          "__rl": true,
+          "value": "45vakEdhDOSlYaD6",
+          "mode": "list",
+          "cachedResultName": "TidesAndCurrentsNOAA Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}",
+            "sessionId": "={{ $json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        120,
+        280
+      ],
+      "id": "10d942f2-5632-4771-ac57-ed87887c287d",
+      "name": "TidesAndCurrents Agent"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-18T21:46:28.452Z",
+  "versionId": "e94f0657-5b8c-4b5e-9fff-5d06d658ad50"
+}
