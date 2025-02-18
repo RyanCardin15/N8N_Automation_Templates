@@ -1,0 +1,1111 @@
+{
+  "active": false,
+  "connections": {
+    "Chat": {
+      "main": [
+        [
+          {
+            "node": "Set Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Available Tools": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Datasets": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data Categories": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data Types": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Location Categories": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Locations": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Stations": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Metrics": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Normals": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Summaries": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Quality": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Coverage": {
+      "ai_tool": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Token": {
+      "main": [
+        [
+          {
+            "node": "NOAA Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Set Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-14T14:47:04.992Z",
+  "id": "Ex9nZnbynflDwWht",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "NOAA Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        5020,
+        -620
+      ],
+      "id": "4ba25bf0-ad26-409f-9f65-7b799880927c",
+      "name": "Chat",
+      "webhookId": "noaa-chat-webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "token-field",
+              "name": "token",
+              "value": "yDuTcnapvjNOIISyNVxyAcDxUkBjpkYL",
+              "type": "string"
+            },
+            {
+              "id": "b1f52eae-727d-4e2f-920d-7007485295ec",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId || $json.sessionId }}",
+              "type": "string"
+            },
+            {
+              "id": "5248f001-4362-4781-8e89-66b6ffc984b4",
+              "name": "query",
+              "value": "={{ $json.chatInput || $json.query }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5300,
+        -620
+      ],
+      "id": "45724ffe-ec09-49a6-9097-78e4be1d33a6",
+      "name": "Set Token"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        5520,
+        -380
+      ],
+      "id": "0f49c49e-3b32-43ad-9930-14c2848faef7",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "jiaWKIPd7Ax7W6gQ",
+          "name": "OpenAi"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        5680,
+        -380
+      ],
+      "id": "23357c9a-72f4-406c-b903-654372f89f31",
+      "name": "Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "cXUsJeNKhv5471XR",
+          "name": "CardinLocal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT tool_name, description, required_parameters, optional_parameters, return_format FROM \"AvailableTools\" WHERE workflow_name IN ('NOAA', 'all') ORDER BY CASE WHEN workflow_name = 'NOAA' THEN 1 WHEN workflow_name = 'all' THEN 2 ELSE 3 END, tool_name;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.5,
+      "position": [
+        7860,
+        -400
+      ],
+      "id": "077fb9f4-b3c9-41da-8cae-5c4ceed86ba5",
+      "name": "Available Tools",
+      "credentials": {
+        "postgres": {
+          "id": "cXUsJeNKhv5471XR",
+          "name": "CardinLocal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "You are a NOAA data specialist helping users access and analyze climate data through API tools. Always verify information through API calls.\n\nTo learn about available tools, query the 'Available Tools' PostgreSQL node. This will return detailed information about:\n- All available tools and their purposes\n- Required and optional parameters for each tool\n- Valid parameter formats and values\n- Return data structures\n\nWhenever you are unsure about:\n- Which tool to use for a specific task\n- What parameters a tool requires\n- How to format parameters correctly\n- What data a tool returns\n\nQuery the 'Available Tools' PostgreSQL node to get this information. The response will help you choose the right tool and use it correctly.\n\nNotes:\n- Use ISO dates (YYYY-MM-DD)\n- Rate limits: 5/sec, 10K/day\n- Most endpoints support pagination\n- Verify data before retrieval\n- Chain tools as needed"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        5580,
+        -620
+      ],
+      "id": "c100e8fd-4f24-4eac-8a91-0cc6da101f09",
+      "name": "NOAA Agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Browse available NOAA datasets.\n\nParameters:\n- datatypeid (optional): Filter by specific data type (e.g., 'TMAX,TMIN' or 'PRCP')\n- locationid (optional): Filter by location (e.g., 'FIPS:37' for North Carolina)\n- stationid (optional): Filter by specific station\n- startdate (optional): Start date in ISO format (YYYY-MM-DD)\n- enddate (optional): End date in ISO format (YYYY-MM-DD)\n- sortfield (optional): Sort by 'id', 'name', 'mindate', 'maxdate', or 'datacoverage'\n- sortorder (optional): 'asc' or 'desc' (defaults to asc)\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Dataset ID\n- Dataset name\n- Data coverage percentage\n- Minimum and maximum dates\n- Dataset description",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/datasets",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datatypeid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "startdate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "enddate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortfield",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortorder",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        5940,
+        -400
+      ],
+      "id": "cf38c4ec-3dee-4f5e-8b6a-30133f980418",
+      "name": "Get Datasets"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Browse available NOAA data categories (e.g., temperature, precipitation).\n\nParameters:\n- datasetid (optional): Filter by specific dataset\n- locationid (optional): Filter by location\n- stationid (optional): Filter by specific station\n- startdate (optional): Start date in ISO format (YYYY-MM-DD)\n- enddate (optional): End date in ISO format (YYYY-MM-DD)\n- sortfield (optional): Sort by 'id', 'name'\n- sortorder (optional): 'asc' or 'desc' (defaults to asc)\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Category ID\n- Category name\n- Category description",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/datacategories",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "startdate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "enddate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortfield",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortorder",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        6100,
+        -400
+      ],
+      "id": "677e085d-b4c5-4367-ba61-92d2ccfb5995",
+      "name": "Get Data Categories"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get detailed information about types of measurements available in NOAA datasets.\n\nParameters:\n- datasetid (optional): Filter by specific dataset\n- locationid (optional): Filter by location\n- stationid (optional): Filter by specific station\n- datacategoryid (optional): Filter by data category (e.g., 'TEMP' for temperature)\n- startdate (optional): Start date in ISO format (YYYY-MM-DD)\n- enddate (optional): End date in ISO format (YYYY-MM-DD)\n- sortfield (optional): Sort by 'id', 'name', 'mindate', 'maxdate'\n- sortorder (optional): 'asc' or 'desc' (defaults to asc)\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Data type ID\n- Data type name\n- Data type description\n- Measurement parameters\n- Units of measurement",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/datatypes",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "datacategoryid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "startdate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "enddate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortfield",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortorder",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        6260,
+        -400
+      ],
+      "id": "67bf6cf5-133e-47b3-84d0-69a568b5de22",
+      "name": "Get Data Types"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Find available types of locations in NOAA datasets (e.g., city, county, state, etc.).\n\nParameters:\n- datasetid (optional): Filter by specific dataset\n- startdate (optional): Start date in ISO format (YYYY-MM-DD)\n- enddate (optional): End date in ISO format (YYYY-MM-DD)\n- sortfield (optional): Sort by 'id', 'name'\n- sortorder (optional): 'asc' or 'desc' (defaults to asc)\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Location category ID\n- Location category name\n- Location category description",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/locationcategories",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "startdate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "enddate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortfield",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortorder",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        6420,
+        -400
+      ],
+      "id": "4469d416-722e-4c88-931e-9a94215a6eec",
+      "name": "Get Location Categories"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Search for specific locations and their details in NOAA datasets.\n\nParameters:\n- datasetid (optional): Filter by specific dataset\n- locationcategoryid (optional): Filter by location type (e.g., 'CITY', 'CNTY', 'STATE')\n- datacategoryid (optional): Filter by data category (e.g., 'TEMP' for temperature)\n- startdate (optional): Start date in ISO format (YYYY-MM-DD)\n- enddate (optional): End date in ISO format (YYYY-MM-DD)\n- sortfield (optional): Sort by 'id', 'name', 'mindate', 'maxdate'\n- sortorder (optional): 'asc' or 'desc' (defaults to asc)\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Location ID\n- Location name\n- Location type\n- Geographic details\n- Data coverage information",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/locations",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "locationcategoryid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "datacategoryid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "startdate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "enddate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortfield",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortorder",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        6580,
+        -400
+      ],
+      "id": "8a03c6f0-1fde-4a32-82d4-e348c81db654",
+      "name": "Get Locations"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Find weather/climate monitoring stations in NOAA datasets.\n\nParameters:\n- datasetid (optional): Filter by specific dataset\n- locationid (optional): Filter by location\n- datacategoryid (optional): Filter by data category (e.g., 'TEMP' for temperature)\n- datatypeid (optional): Filter by specific data type\n- extent (optional): Search within a geographic extent\n- startdate (optional): Start date in ISO format (YYYY-MM-DD)\n- enddate (optional): End date in ISO format (YYYY-MM-DD)\n- sortfield (optional): Sort by 'id', 'name', 'mindate', 'maxdate', 'datacoverage'\n- sortorder (optional): 'asc' or 'desc' (defaults to asc)\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Station ID\n- Station name\n- Location details\n- Elevation\n- Data coverage information\n- Available data types",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/stations",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "datacategoryid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "datatypeid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "extent",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "startdate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "enddate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortfield",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "sortorder",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        6740,
+        -400
+      ],
+      "id": "9550ddf1-dba7-4bc1-9d1d-c8a6cdedc5cd",
+      "name": "Get Stations"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get actual weather and climate measurements from NOAA datasets.\n\nParameters:\n- datasetid (required): The dataset to fetch data from (e.g., 'GHCND' for Global Historical Climatology Network Daily)\n- startdate (required): Start date in ISO format (YYYY-MM-DD)\n- enddate (required): End date in ISO format (YYYY-MM-DD)\n- datatypeid (optional): Type of data to retrieve (e.g., 'TMAX' for max temperature)\n- locationid (optional): Specific location to get data for\n- stationid (optional): Specific station to get data from\n- units (optional): 'standard' or 'metric' (defaults to standard)\n- includemetadata (optional): Include metadata in the response\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Station information\n- Data type details\n- Date of measurement\n- Actual measurement value\n- Attributes and quality flags",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/data",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid"
+            },
+            {
+              "name": "startdate"
+            },
+            {
+              "name": "enddate"
+            },
+            {
+              "name": "datatypeid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "units",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "includemetadata",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        6900,
+        -400
+      ],
+      "id": "9b4c8a81-8b00-4e0a-a792-f3f89578bbcb",
+      "name": "Get Data"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Get statistical metrics for NOAA data points.\n\nParameters:\n- datasetid (required): The dataset to fetch metrics from (e.g., 'GHCND')\n- startdate (required): Start date in ISO format (YYYY-MM-DD)\n- enddate (required): End date in ISO format (YYYY-MM-DD)\n- locationid (optional): Filter by specific location\n- stationid (optional): Filter by specific station\n- datatypeid (optional): Filter by specific data type\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Statistical metrics for the specified period\n- Aggregated data values\n- Data quality indicators\n- Coverage statistics",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/metrics",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid"
+            },
+            {
+              "name": "startdate"
+            },
+            {
+              "name": "enddate"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "datatypeid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        7060,
+        -400
+      ],
+      "id": "b3b1be8c-a668-4440-a8f4-fd7f51b6d173",
+      "name": "Get Metrics"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Access climatological normals data from NOAA datasets.\n\nParameters:\n- datasetid (required): The dataset to fetch normals from (e.g., 'NORMAL_DLY')\n- startdate (required): Start date in ISO format (YYYY-MM-DD)\n- enddate (required): End date in ISO format (YYYY-MM-DD)\n- locationid (optional): Filter by specific location\n- stationid (optional): Filter by specific station\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Station information\n- Normal values for various climate parameters\n- Period of record\n- Statistical confidence intervals",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/normals",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid"
+            },
+            {
+              "name": "startdate"
+            },
+            {
+              "name": "enddate"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        7220,
+        -400
+      ],
+      "id": "a3bf5422-a868-4791-a8c9-7098c32c8b3e",
+      "name": "Get Normals"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieve summarized data for periods from NOAA datasets.\n\nParameters:\n- datasetid (required): The dataset to fetch summaries from\n- startdate (required): Start date in ISO format (YYYY-MM-DD)\n- enddate (required): End date in ISO format (YYYY-MM-DD)\n- locationid (optional): Filter by specific location\n- stationid (optional): Filter by specific station\n- datatypeid (optional): Filter by specific data type\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Period summary statistics\n- Aggregated values\n- Data completeness information\n- Quality indicators",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/summaries",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid"
+            },
+            {
+              "name": "startdate"
+            },
+            {
+              "name": "enddate"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "datatypeid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        7380,
+        -400
+      ],
+      "id": "23dba963-af62-4beb-b3a5-abd5f4df8554",
+      "name": "Get Summaries"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Access quality control information for NOAA data.\n\nParameters:\n- datasetid (required): The dataset to check quality for\n- startdate (required): Start date in ISO format (YYYY-MM-DD)\n- enddate (required): End date in ISO format (YYYY-MM-DD)\n- locationid (optional): Filter by specific location\n- stationid (optional): Filter by specific station\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Quality control flags\n- Data validation results\n- Quality assurance metrics\n- Data reliability indicators",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/quality",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid"
+            },
+            {
+              "name": "startdate"
+            },
+            {
+              "name": "enddate"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        7540,
+        -400
+      ],
+      "id": "cfbbf5bb-2bd9-4ece-995f-c57f67029c3f",
+      "name": "Get Quality"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Check data availability and coverage in NOAA datasets.\n\nParameters:\n- datasetid (required): The dataset to check coverage for\n- startdate (optional): Start date in ISO format (YYYY-MM-DD)\n- enddate (optional): End date in ISO format (YYYY-MM-DD)\n- locationid (optional): Filter by specific location\n- stationid (optional): Filter by specific station\n- limit (optional): Maximum records to return (max 1000, default 25)\n- offset (optional): Records to skip for pagination\n\nReturns:\n- Data coverage percentages\n- Temporal coverage information\n- Spatial coverage details\n- Data completeness metrics",
+        "url": "https://www.ncei.noaa.gov/cdo-web/api/v2/coverage",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "datasetid"
+            },
+            {
+              "name": "startdate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "enddate",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "locationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "stationid",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "limit",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "offset",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "={{ $json.token }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        7700,
+        -400
+      ],
+      "id": "9e0449b2-bbf2-4b6e-8380-a8d23b3980fd",
+      "name": "Get Coverage"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        5000,
+        -460
+      ],
+      "id": "80530a9f-b39f-41f3-aa1c-93b86111c938",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-18T21:35:41.754Z",
+  "versionId": "e445a0c0-26d6-4bbe-8615-af0717e3b21c"
+}
