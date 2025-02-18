@@ -1,0 +1,609 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Activity Summary": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Readiness Summary": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Sleep Periods": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Profile": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Daily Stress": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Heart Rate": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Tags": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Session Data": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Enhanced Tags": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Rest Mode Periods": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Ring Configuration": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Sleep Time": {
+      "ai_tool": [
+        [
+          {
+            "node": "Oura Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-17T14:53:31.971Z",
+  "id": "utsIW7qre0gXzIXZ",
+  "meta": null,
+  "name": "Oura Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        2880,
+        700
+      ],
+      "id": "e62e4d55-42a0-4263-91a7-2be02d6a07e5",
+      "name": "When chat message received",
+      "webhookId": "5dbf93e2-832a-4bcd-959d-9b82f87f54d6"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        3020,
+        920
+      ],
+      "id": "4d03fd80-ac08-4a51-9ac7-4161cf752f32",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "jiaWKIPd7Ax7W6gQ",
+          "name": "OpenAi"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        3200,
+        920
+      ],
+      "id": "8e98d227-a12a-4f38-9718-8fc1ebb0f842",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "cXUsJeNKhv5471XR",
+          "name": "CardinLocal"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getActivity",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.ouraTool",
+      "typeVersion": 1,
+      "position": [
+        3640,
+        880
+      ],
+      "id": "e24cf2a6-5702-4f68-911e-23cfb10e6f28",
+      "name": "Activity Summary",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getReadiness",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.ouraTool",
+      "typeVersion": 1,
+      "position": [
+        3780,
+        880
+      ],
+      "id": "c192fbe5-d9e4-43e4-9078-90b005bfdf6b",
+      "name": "Get Readiness Summary",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.ouraTool",
+      "typeVersion": 1,
+      "position": [
+        3920,
+        880
+      ],
+      "id": "0f76dc8c-e8cf-4492-adbf-ab976f19c4e8",
+      "name": "Get Sleep Periods",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "profile"
+      },
+      "type": "n8n-nodes-base.ouraTool",
+      "typeVersion": 1,
+      "position": [
+        4080,
+        880
+      ],
+      "id": "1ec66b3c-8f9c-4ac1-92dc-c0be46b1b0d8",
+      "name": "Get Profile",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves daily stress data from your Oura ring including stress levels, recovery index, and heart rate variability (HRV). This tool provides insights into your body's stress and recovery patterns.\n\nParameters:\n- start_date: Start date in ISO 8601 format (YYYY-MM-DD)\n- end_date: End date in ISO 8601 format (YYYY-MM-DD)\n- next_token: Optional pagination token\n\nReturns:\n- Daily stress scores\n- Resting heart rate\n- Heart rate variability\n- Recovery index\n- Stress balance\n- Stress ratio",
+        "url": "https://api.ouraring.com/v2/usercollection/daily_stress",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "start_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "end_date",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        4220,
+        880
+      ],
+      "id": "ac4b4e9e-3ab6-4553-9dac-413463b649ce",
+      "name": "Get Daily Stress",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves detailed heart rate data from your Oura ring at various intervals. Provides continuous heart rate monitoring data throughout the day.\n\nParameters:\n- start_date: Start date in ISO 8601 format (YYYY-MM-DD)\n- end_date: End date in ISO 8601 format (YYYY-MM-DD)\n- next_token: Optional pagination token\n\nReturns:\n- Timestamp of measurement\n- Heart rate value (bpm)\n- Source of measurement\n- Measurement validity indicators",
+        "url": "https://api.ouraring.com/v2/usercollection/heartrate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "start_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "end_date",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        4360,
+        880
+      ],
+      "id": "465e0497-b9f9-415f-92e1-e6cc76064625",
+      "name": "Get Heart Rate",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        3100,
+        700
+      ],
+      "id": "760e9211-6152-410e-b58a-ba8199792e81",
+      "name": "Oura Agent"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Manages and retrieves tags for activities, medications, and other events from your Oura ring. Tags help track specific activities or conditions that might affect your health metrics.\n\nParameters:\n- start_date: Start date in ISO 8601 format (YYYY-MM-DD)\n- end_date: End date in ISO 8601 format (YYYY-MM-DD)\n- next_token: Optional pagination token\n- tag_type: Optional filter by tag type\n\nReturns:\n- Tag timestamps\n- Tag types\n- Tag descriptions\n- Associated metrics\n- Tag duration",
+        "url": "https://api.ouraring.com/v2/usercollection/tag",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "start_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "end_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "tag_type",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        4500,
+        880
+      ],
+      "id": "ea4d56d0-fc7e-4927-b0d3-20ea58f50fc9",
+      "name": "Get Tags",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves detailed workout and activity session data from your Oura ring. Provides comprehensive information about your exercise and activity sessions.\n\nParameters:\n- start_date: Start date in ISO 8601 format (YYYY-MM-DD)\n- end_date: End date in ISO 8601 format (YYYY-MM-DD)\n- next_token: Optional pagination token\n\nReturns:\n- Session start and end times\n- Activity type\n- Intensity levels\n- Caloric expenditure\n- Heart rate zones\n- Recovery time\n- Session labels and notes",
+        "url": "https://api.ouraring.com/v2/usercollection/session",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "start_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "end_date",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        4640,
+        880
+      ],
+      "id": "95013d20-00ad-4e73-b3b2-26213fb34c9a",
+      "name": "Get Session Data",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves detailed information about tagged activities from your Oura ring. This tool provides enhanced data about specific tagged events and activities.\n\nParameters:\n- start_date: Start date in ISO 8601 format (YYYY-MM-DD)\n- end_date: End date in ISO 8601 format (YYYY-MM-DD)\n- next_token: Optional pagination token\n- tag_type: Optional filter by tag type\n\nReturns:\n- Detailed tag information\n- Associated metrics and data\n- Enhanced activity details\n- Contextual information\n- Related health markers",
+        "url": "https://api.ouraring.com/v2/usercollection/enhanced_tag",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "start_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "end_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "tag_type",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        4780,
+        880
+      ],
+      "id": "b7f67e6f-f24d-40f8-8651-c8d0c31fe6d0",
+      "name": "Get Enhanced Tags",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves information about rest mode periods from your Oura ring. Rest mode indicates periods when you're taking time to recover or rest.\n\nParameters:\n- start_date: Start date in ISO 8601 format (YYYY-MM-DD)\n- end_date: End date in ISO 8601 format (YYYY-MM-DD)\n- next_token: Optional pagination token\n\nReturns:\n- Rest mode period start and end times\n- Rest mode status\n- Recovery indicators\n- Rest mode settings\n- Associated health metrics",
+        "url": "https://api.ouraring.com/v2/usercollection/rest_mode_period",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "start_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "end_date",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        4920,
+        880
+      ],
+      "id": "873c764e-6f99-456c-ab3c-ffcff7aa391b",
+      "name": "Get Rest Mode Periods",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves detailed information about your Oura ring's configuration and settings. This provides technical details about the ring and its capabilities.\n\nParameters: None required\n\nReturns:\n- Ring hardware details\n- Firmware version\n- Ring settings\n- Device capabilities\n- Configuration status",
+        "url": "https://api.ouraring.com/v2/usercollection/ring_configuration",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        5060,
+        880
+      ],
+      "id": "344f3d43-f54e-472d-a4d8-507a1b5038e3",
+      "name": "Get Ring Configuration",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Retrieves ideal bedtime window recommendations from your Oura ring. This helps optimize your sleep schedule based on your body's patterns and needs.\n\nParameters:\n- start_date: Start date in ISO 8601 format (YYYY-MM-DD)\n- end_date: End date in ISO 8601 format (YYYY-MM-DD)\n- next_token: Optional pagination token\n\nReturns:\n- Recommended bedtime window\n- Sleep schedule optimization\n- Circadian rhythm analysis\n- Sleep quality predictions\n- Daily bedtime guidance",
+        "url": "https://api.ouraring.com/v2/usercollection/ideal_bedtime",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "ouraApi",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "start_date",
+              "valueProvider": "modelOptional"
+            },
+            {
+              "name": "end_date",
+              "valueProvider": "modelOptional"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        5200,
+        880
+      ],
+      "id": "9d2d651f-23df-494b-8041-165a96a8f4b1",
+      "name": "Get Sleep Time",
+      "credentials": {
+        "ouraApi": {
+          "id": "gpNhHBud9p4LLACy",
+          "name": "Oura account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-17T15:31:17.567Z",
+  "versionId": "810cebf0-4343-4569-9b19-dd86a1d9ffd6"
+}
